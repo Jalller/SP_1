@@ -1,0 +1,31 @@
+@startuml
+'https://plantuml.com/object-diagram
+
+
+object movie1 {
+  id = 101
+  title = "Another Round"
+  releaseDate = "2020-09-24"
+  rating = 8.0
+}
+
+object genre1 {
+  id = 1
+  name = "Drama"
+}
+
+object genre2 {
+  id = 2
+  name = "Comedy"
+}
+
+object person1 {
+  id = 501
+  name = "Mads Mikkelsen"
+  role = "ACTOR"
+}
+
+movie1 -- genre1
+movie1 -- genre2
+movie1 -- person1
+@enduml

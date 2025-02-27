@@ -1,0 +1,148 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+
+class Movie {
+  - Long id
+  - String title
+  - LocalDate releaseDate
+  - double rating
+  - double popularity
+  - String description
+  + List<Genre> genres
+  + List<Person> cast
+  + Person director
+}
+
+class Genre {
+  - Long id
+  - String name
+  + List<Movie> movies
+}
+
+class Person {
+  - Long id
+  - String name
+  - Role role
+  + List<Movie> movies
+}
+
+class Role {
+  - Long id
+  - String name
+}
+
+class User {
+  - Long id
+  - String username
+  - String email
+  - String password
+  - Role role
+}
+
+class Review {
+  - Long id
+  - User user
+  - Movie movie
+  - int rating
+  - String comment
+}
+
+' ======= DTO LAYER =======
+class MovieDTO {
+  - String title
+  - LocalDate releaseDate
+  - double rating
+  - List<String> genres
+  - List<String> actors
+  - String director
+}
+
+class UserDTO {
+  - String username
+  - String email
+}
+
+class ReviewDTO {
+  - String username
+  - String movieTitle
+  - int rating
+  - String comment
+}
+
+MovieDTO <-- Movie : "converted from"
+UserDTO <-- User : "converted from"
+ReviewDTO <-- Review : "converted from"
+
+' ======= DAO LAYER =======
+interface MovieDAO {
+  + Optional<Movie> findById(Long id)
+  + List<Movie> findAll()
+  + void save(Movie movie)
+  + void delete(Long id)
+}
+
+interface UserDAO {
+  + Optional<User> findById(Long id)
+  + List<User> findAll()
+  + void save(User user)
+  + void delete(Long id)
+}
+
+interface ReviewDAO {
+  + Optional<Review> findById(Long id)
+  + List<Review> findAll()
+  + void save(Review review)
+  + void delete(Long id)
+}
+
+MovieDAO --> Movie
+UserDAO --> User
+ReviewDAO --> Review
+
+' ======= SERVICE LAYER =======
+class MovieService {
+  + List<MovieDTO> getAllMovies()
+  + MovieDTO getMovieById(Long id)
+  + void addMovie(MovieDTO movieDTO)
+  + void deleteMovie(Long id)
+}
+
+class UserService {
+  + List<UserDTO> getAllUsers()
+  + UserDTO getUserById(Long id)
+  + void registerUser(UserDTO userDTO)
+}
+
+class ReviewService {
+  + List<ReviewDTO> getAllReviews()
+  + void addReview(ReviewDTO reviewDTO)
+}
+
+MovieService --> MovieDAO
+UserService --> UserDAO
+ReviewService --> ReviewDAO
+
+' ======= API CONTROLLERS =======
+class MovieController {
+  + List<MovieDTO> getAllMovies()
+  + MovieDTO getMovie(Long id)
+  + void addMovie(MovieDTO movieDTO)
+  + void deleteMovie(Long id)
+}
+
+class UserController {
+  + List<UserDTO> getAllUsers()
+  + UserDTO getUser(Long id)
+  + void registerUser(UserDTO userDTO)
+}
+
+class ReviewController {
+  + List<ReviewDTO> getAllReviews()
+  + void addReview(ReviewDTO reviewDTO)
+}
+
+MovieController --> MovieService
+UserController --> UserService
+ReviewController --> ReviewService
+@enduml

@@ -1,0 +1,56 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+class Movie {
+  - Long id
+  - String title
+  - LocalDate releaseDate
+  - double rating
+  - double popularity
+  - String description
+  + List<Genre> genres
+  + List<Person> cast
+  + Person director
+}
+
+class Genre {
+  - Long id
+  - String name
+  + List<Movie> movies
+}
+
+class Person {
+  - Long id
+  - String name
+  - Role role
+  + List<Movie> movies
+}
+
+class Role {
+  - Long id
+  - String name
+}
+
+class User {
+  - Long id
+  - String username
+  - String email
+  - String password
+  - Role role
+}
+
+class Review {
+  - Long id
+  - User user
+  - Movie movie
+  - int rating
+  - String comment
+}
+
+Movie --> Genre : "has many"
+Movie --> Person : "has cast & director"
+Person --> Role : "has role"
+User --> Role : "has a role"
+User --> Review : "writes"
+Review --> Movie : "about"
+@enduml

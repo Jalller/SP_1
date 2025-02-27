@@ -1,0 +1,23 @@
+@startuml
+'https://plantuml.com/activity-diagram-beta
+
+start
+:User logs in;
+:User searches for a movie;
+:Display search results;
+if (Movie found?) then (yes)
+  :Show movie details;
+  :User writes a review;
+  if (Valid review?) then (yes)
+    :Save review to database;
+    :Show success message;
+  else (no)
+    :Show error message;
+    -> User writes a review;
+  endif
+else (no)
+  :Show "Movie not found" message;
+endif
+stop
+@enduml
+

@@ -1,0 +1,18 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+actor User
+participant "MovieController" as Controller
+participant "MovieService" as Service
+participant "MovieRepository" as Repository
+participant "Database" as DB
+
+User -> Controller : GET /movies/{id}
+Controller -> Service : getMovieById(id)
+Service -> Repository : findById(id)
+Repository -> DB : Query movie by ID
+DB -> Repository : Return movie data
+Repository -> Service : Return movie entity
+Service -> Controller : Convert to DTO
+Controller -> User : Return JSON response
+@enduml

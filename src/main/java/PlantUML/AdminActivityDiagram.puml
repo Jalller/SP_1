@@ -1,0 +1,17 @@
+@startuml
+'https://plantuml.com/activity-diagram-beta
+
+
+start
+:Admin logs in;
+:Admin selects "Add Movie";
+:Enter movie details;
+if (Valid details?) then (yes)
+  :Save to database;
+  :Show success message;
+else (no)
+  :Show error message;
+  -> Enter movie details;
+endif
+stop
+@enduml

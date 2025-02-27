@@ -1,0 +1,19 @@
+@startuml
+'https://plantuml.com/use-case-diagram
+
+actor "User" as User
+actor "Admin" as Admin
+
+rectangle "Movie Repository System" {
+  User --> (Search for Movies)
+  User --> (View Movie Details)
+  User --> (Write Review)
+  User --> (View Actor/Director Info)
+  User --> (View Genres)
+
+  Admin --> (Add Movie)
+  Admin --> (Update Movie)
+  Admin --> (Delete Movie)
+  Admin --> (Manage Users)
+}
+@enduml

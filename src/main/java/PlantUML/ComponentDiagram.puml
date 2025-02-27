@@ -1,0 +1,20 @@
+@startuml
+'https://plantuml.com/component-diagram
+
+
+package "Backend" {
+  component MovieService
+  component UserService
+  component ReviewService
+}
+
+package "Database" {
+  component MovieRepository
+  component UserRepository
+  component ReviewRepository
+}
+
+MovieService --> MovieRepository
+UserService --> UserRepository
+ReviewService --> ReviewRepository
+@enduml

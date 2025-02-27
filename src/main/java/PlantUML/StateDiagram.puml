@@ -1,0 +1,10 @@
+@startuml
+'https://plantuml.com/state-diagram
+
+
+[*] --> NewMovie
+NewMovie --> Released : Release Date Reached
+Released --> Archived : Out of Distribution
+Archived --> Deleted : Removed from DB
+Deleted --> [*]
+@enduml

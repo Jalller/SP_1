@@ -1,0 +1,23 @@
+@startuml
+'https://plantuml.com/deployment-diagram
+
+node "Client Device" {
+  component "Web Browser"
+}
+
+node "Backend Server" {
+  component "Spring Boot App"
+  component "MovieController"
+  component "UserController"
+}
+
+node "Database Server" {
+  component "PostgreSQL Database"
+}
+
+"Web Browser" --> "MovieController" : HTTP Request
+"MovieController" --> "Spring Boot App" : Handles Request
+"Spring Boot App" --> "PostgreSQL Database" : Query Movies
+"PostgreSQL Database" --> "Spring Boot App" : Returns Data
+"Spring Boot App" --> "Web Browser" : JSON Response
+@enduml
